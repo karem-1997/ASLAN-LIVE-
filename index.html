@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#050508">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ASLAN LIVE">
+<title>ASLAN LIVE</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  background: #050508;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
+  direction: rtl;
+  color: #fff;
+  overflow-x: hidden;
+}
+.bg-glow {
+  position: fixed;
+  top: -20%; left: -20%;
+  width: 140%; height: 140%;
+  background: radial-gradient(circle at 50% 20%, rgba(255,215,0,0.06) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(37,211,102,0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+.app-container {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 20px;
+}
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 36px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.logo-wrapper:active { transform: scale(0.96); }
+.logo-img {
+  width: 110px; height: 110px;
+  border-radius: 28px;
+  object-fit: cover;
+  margin: 0 auto 14px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,0,0.1);
+  transition: box-shadow 0.3s;
+}
+.logo-wrapper:hover .logo-img {
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 3px rgba(255,215,0,0.2);
+}
+.logo-text {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.logo-sub {
+  font-size: 11px;
+  color: #555;
+  margin-top: 4px;
+  letter-spacing: 4px;
+}
+.glass-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 28px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+}
+.welcome-badge {
+  background: rgba(255,215,0,0.08);
+  border: 1px solid rgba(255,215,0,0.15);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+  font-size: 15px;
+  color: #FFD700;
+  text-align: center;
+  display: none;
+  animation: fadeIn 0.5s;
+  font-weight: 600;
+}
+.input-group { margin-bottom: 18px; }
+.input-group label {
+  display: block;
+  color: #777;
+  font-size: 13px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.input-wrap {
+  position: relative;
+}
+.input-wrap input {
+  width: 100%;
+  padding: 18px 18px 18px 54px;
+  border-radius: 18px;
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  font-size: 18px;
+  outline: none;
+  transition: all 0.3s;
+  direction: ltr;
+  text-align: right;
+  font-family: monospace;
+}
+.input-wrap input:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 0 4px rgba(255,215,0,0.08);
+}
+.input-wrap .flag {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+.btn-main {
+  width: 100%;
+  padding: 18px;
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  color: #000;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-main:active { transform: scale(0.97); }
+.result-box {
+  margin-top: 24px;
+  padding: 28px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 22px;
+  text-align: center;
+  display: none;
+  animation: fadeUp 0.5s;
+}
+.result-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  margin: 0 auto 14px;
+  box-shadow: 0 12px 35px rgba(255,215,0,0.15);
+}
+.result-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.result-phone { color: #888; font-size: 14px; font-family: monospace; direction: ltr; margin-bottom: 8px; }
+.result-link {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,215,0,0.15);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: #FFD700;
+  word-break: break-all;
+  margin-bottom: 16px;
+  direction: ltr;
+  text-align: right;
+}
+.btn-row { display: flex; gap: 10px; }
+.btn-row button {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-wa { background: #25D366; color: #fff; }
+.btn-go { background: linear-gradient(135deg, #FFD700, #FF8C00); color: #000; }
+.error-msg {
+  color: #ff5555;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 14px;
+  display: none;
+  font-weight: 500;
+}
+.loading-msg {
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.steps-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.steps-title {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 13px;
+  color: #888;
+}
+.step-item:last-child { border: none; }
+.step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255,215,0,0.1);
+  color: #FFD700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.install-android {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 14px 24px;
+  display: none;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  max-width: 92%;
+}
+.install-android.show { display: flex; }
+.install-android button {
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+.install-ios {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.92);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 18px 24px;
+  z-index: 100;
+  display: none;
+  text-align: center;
+  max-width: 92%;
+  width: fit-content;
+}
+.install-ios.show { display: block; }
+.install-ios .ios-icon { font-size: 28px; margin-bottom: 6px; }
+.install-ios .ios-title { font-weight: 700; margin-bottom: 4px; }
+.install-ios .ios-text { color: #888; font-size: 13px; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(25px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: #0c0c10;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 28px;
+  padding: 36px 28px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  animation: scaleIn 0.35s;
+}
+.modal-box img {
+  width: 90px; height: 90px;
+  border-radius: 24px;
+  object-fit: cover;
+  margin-bottom: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+.modal-box h2 {
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.modal-box p {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+.modal-close {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 40px;
+  text-align: center;
+  color: #333;
+  font-size: 12px;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div class="bg-glow"></div>
+
+<div class="app-container">
+
+  <div class="logo-wrapper" onclick="openAbout()">
+    <img src="https://i.postimg.cc/prFWqdNm/IMG-20260817-WA0047.jpg" class="logo-img" alt="ASLAN LIVE">
+    <div class="logo-text">ASLAN LIVE</div>
+    <div class="logo-sub">LIVE STREAMING</div>
+  </div>
+
+  <div class="glass-card">
+    <div class="welcome-badge" id="welcomeBadge"></div>
+
+    <div class="input-group">
+      <label>🔍 أدخل رقم تليفونك</label>
+      <div class="input-wrap">
+        <span class="flag">🇪🇬</span>
+        <input type="tel" id="phoneInput" placeholder="01xxxxxxxx" maxlength="11" onkeypress="if(event.key==='Enter') searchUser()">
+      </div>
+    </div>
+
+    <button class="btn-main" onclick="searchUser()">
+      <span>🔍</span> بحث
+    </button>
+
+    <div class="loading-msg" id="loadingMsg">⏳ جاري الاتصال بقاعدة البيانات...</div>
+    <div class="error-msg" id="errorMsg">❌ الرقم ده مش مسجل عندنا. اتواصل مع الدعم.</div>
+
+    <div class="result-box" id="resultBox">
+      <div class="result-avatar">👤</div>
+      <div class="result-name" id="resName"></div>
+      <div class="result-phone" id="resPhone"></div>
+      <div class="result-link" id="resLink"></div>
+      <div class="btn-row">
+        <button class="btn-wa" onclick="sendWhatsApp()">💬 واتساب</button>
+        <button class="btn-go" onclick="openUserLink()">🚀 فتح الرابط</button>
+      </div>
+    </div>
+
+    <div class="steps-section" id="stepsSection">
+      <div class="steps-title">📲 إزاي تثبّت الموقع على شاشتك؟</div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>افتح الرابط في متصفح Safari (iPhone) أو Chrome (Android)</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>اضغط زر المشاركة ↗️ في الأسفل (iPhone) أو القائمة ⋮ (Android)</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>اختار "Add to Home Screen" أو "إضافة للشاشة الرئيسية"</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div>كده الموقع بقى تطبيق على شاشتك! 🎉</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">© 2026 ASLAN LIVE — جميع الحقوق محفوظة</div>
+</div>
+
+<div class="install-android" id="installAndroid">
+  <span>📲 ثبّت التطبيق على شاشتك!</span>
+  <button onclick="installApp()">تثبيت</button>
+</div>
+
+<div class="install-ios" id="installIOS">
+  <div class="ios-icon">📲</div>
+  <div class="ios-title">اضغط زر المشاركة ↗️</div>
+  <div class="ios-text">ثم اختار "Add to Home Screen"</div>
+</div>
+
+<div class="modal-overlay" id="aboutModal" onclick="if(event.target===this)closeAbout()">
+  <div class="modal-box">
+    <img src="https://i.postimg.cc/prFWqdNm/IMG-20260817-WA0047.jpg" alt="ASLAN LIVE">
+    <h2>ASLAN LIVE</h2>
+    <p>أفضل منصة لمشاهدة البث المباشر.<br>صُممت لتقدم لك تجربة سلسة على كل الأجهزة.<br><br>📱 iPhone & Android<br>🚀 سريع وآمن</p>
+    <button class="modal-close" onclick="closeAbout()">إغلاق</button>
+  </div>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+// ==================== Firebase ====================
+const firebaseConfig = {
+  apiKey: "AIzaSyCTjxcKGbIqMsTBfQAq7OhdGG3FpaktfPg",
+  authDomain: "aslan-live.firebaseapp.com",
+  projectId: "aslan-live",
+  storageBucket: "aslan-live.firebasestorage.app",
+  messagingSenderId: "455175510176",
+  appId: "1:455175510176:web:effc960dbf6b47473751c5",
+  measurementId: "G-WHK8VVFHZ6",
+  databaseURL: "https://aslan-live-default-rtdb.firebaseio.com"
+};
+firebase.initializeApp(firebaseConfig);
+const rtdb = firebase.database();
+
+// ==================== Logic ====================
+function normPhone(p) {
+  p = p.replace(/\s+/g, '').replace(/\+/g, '');
+  if (p.startsWith('0')) p = '20' + p.slice(1);
+  if (!p.startsWith('20')) p = '20' + p;
+  return p;
+}
+function fmtPhone(p) { return p.startsWith('20') ? '0' + p.slice(2) : p; }
+
+let users = [];
+let baseUrl = '';
+let currentUser = null;
+
+function init() {
+  rtdb.ref('users').once('value').then(snap => {
+    const data = snap.val() || {};
+    users = Object.entries(data).map(([id, u]) => ({ id, ...u }));
+    document.getElementById('loadingMsg').style.display = 'none';
+
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('ref');
+    if (ref) {
+      const u = users.find(x => x.phone === ref);
+      if (u) {
+        document.getElementById('welcomeBadge').style.display = 'block';
+        document.getElementById('welcomeBadge').textContent = '👋 أهلاً بيك يا ' + u.name + '!';
+        document.getElementById('phoneInput').value = fmtPhone(u.phone);
+      }
+    }
+  });
+
+  rtdb.ref('settings/baseUrl').once('value').then(s => {
+    baseUrl = s.val() || 'https://aslan.live';
+  });
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    window.deferredPrompt = e;
+    if (!window.matchMedia('(display-mode: standalone)').matches) {
+      document.getElementById('installAndroid').classList.add('show');
+    }
+  });
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isStandalone = window.navigator.standalone === true;
+  if (isIOS && !isStandalone) {
+    setTimeout(() => document.getElementById('installIOS').classList.add('show'), 2500);
+    setTimeout(() => document.getElementById('installIOS').classList.remove('show'), 10000);
+  }
+}
+
+function searchUser() {
+  const val = document.getElementById('phoneInput').value.trim();
+  if (!val) return;
+  const phone = normPhone(val);
+  const u = users.find(x => x.phone === phone);
+
+  document.getElementById('errorMsg').style.display = 'none';
+  const box = document.getElementById('resultBox');
+
+  if (u) {
+    currentUser = u;
+    box.style.display = 'block';
+    document.getElementById('resName').textContent = u.name;
+    document.getElementById('resPhone').textContent = fmtPhone(u.phone);
+    const link = u.customLink || baseUrl;
+    document.getElementById('resLink').textContent = link;
+    setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  } else {
+    box.style.display = 'none';
+    document.getElementById('errorMsg').style.display = 'block';
+  }
+}
+
+function sendWhatsApp() {
+  if (!currentUser) return;
+  const link = currentUser.customLink || baseUrl;
+  const msg = 'أهلاً ' + currentUser.name + '! 👋\nرابطك على ASLAN LIVE:\n' + link;
+  window.open('https://wa.me/' + currentUser.phone + '?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function openUserLink() {
+  if (!currentUser) return;
+  const link = currentUser.customLink || baseUrl;
+  window.open(link, '_blank');
+}
+
+function installApp() {
+  const prompt = window.deferredPrompt;
+  if (prompt) {
+    prompt.prompt();
+    prompt.userChoice.then(() => {
+      document.getElementById('installAndroid').classList.remove('show');
+      window.deferredPrompt = null;
+    });
+  }
+}
+
+function openAbout() {
+  document.getElementById('aboutModal').classList.add('show');
+}
+function closeAbout() {
+  document.getElementById('aboutModal').classList.remove('show');
+}
+
+init();
+</script>
+
+</body>
+</html>
