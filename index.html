@@ -564,6 +564,29 @@ let allButtons = [];
 let allSteps = {};
 let defaultButtons = {};
 
+/* ========== MULTI-LANG HELPERS ========== */
+function getLocalized(data, fallback) {
+  if (!data) return fallback || '';
+  if (typeof data === 'string') return data;
+  if (typeof data === 'object' && data !== null) {
+    return data[currentLang] || data.ar || data.en || Object.values(data)[0] || fallback || '';
+  }
+  return fallback || '';
+}
+function getBtnName(btn) { return getLocalized(btn.name, ''); }
+function getBtnDesc(btn) { return getLocalized(btn.desc, ''); }
+function getStepsText(device) {
+  var s = allSteps[device];
+  if (!s) return '';
+  if (typeof s === 'string') return s;
+  if (typeof s === 'object' && s !== null) {
+    return s[currentLang] || s.ar || s.en || Object.values(s)[0] || '';
+  }
+  return '';
+}
+/* ======================================== */
+
+
 function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
@@ -638,24 +661,27 @@ function init() {
 }
 
 function createBtnEl(btn, cls) {
-  const wrap = document.createElement('div');
+  var wrap = document.createElement('div');
   wrap.className = 'btn-wrap';
 
-  const a = document.createElement('a');
+  var name = getBtnName(btn);
+  var desc = getBtnDesc(btn);
+
+  var a = document.createElement('a');
   a.href = btn.url || '#';
   a.className = 'btn-dynamic ' + cls;
   a.target = '_blank';
   if (btn.icon) {
-    a.innerHTML = '<img src="' + btn.icon + '" alt=""> <span>' + (btn.name || '') + '</span>';
+    a.innerHTML = '<img src="' + btn.icon + '" alt=""> <span>' + name + '</span>';
   } else {
-    a.innerHTML = '<span>🚀</span> <span>' + (btn.name || '') + '</span>';
+    a.innerHTML = '<span>🚀</span> <span>' + name + '</span>';
   }
   wrap.appendChild(a);
 
-  if (btn.desc) {
-    const d = document.createElement('div');
+  if (desc) {
+    var d = document.createElement('div');
     d.className = 'btn-desc';
-    d.textContent = btn.desc;
+    d.textContent = desc;
     wrap.appendChild(d);
   }
   return wrap;
@@ -724,17 +750,17 @@ function renderButtons() {
 }
 
 function renderSteps() {
-  const devices = ['ios', 'android', 'web'];
-  devices.forEach(dev => {
-    const box = document.getElementById(dev + 'Steps');
-    const stepsText = allSteps[dev] || '';
+  var devices = ['ios', 'android', 'web'];
+  devices.forEach(function(dev) {
+    var box = document.getElementById(dev + 'Steps');
+    var stepsText = getStepsText(dev);
     if (!stepsText.trim()) {
       box.innerHTML = '';
       return;
     }
-    const lines = stepsText.split('\n').filter(l => l.trim());
-    let html = '<div class="steps-title">📲 ' + i18n[currentLang].stepsTitle + '</div>';
-    lines.forEach((line, i) => {
+    var lines = stepsText.split('\n').filter(function(l) { return l.trim(); });
+    var html = '<div class="steps-title">📲 ' + i18n[currentLang].stepsTitle + '</div>';
+    lines.forEach(function(line, i) {
       html += '<div class="step"><div class="step-num">' + (i+1) + '</div><div>' + line.trim() + '</div></div>';
     });
     box.innerHTML = html;
