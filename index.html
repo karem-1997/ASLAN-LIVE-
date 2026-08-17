@@ -7,445 +7,458 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ASLAN LIVE">
-<title>ASLAN LIVE</title>
+<meta name="description" content="ASLAN LIVE - Enter Your World Now">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="https://i.postimg.cc/prFWqdNm/IMG-20260817-WA0047.jpg">
+<title>ASLAN LIVE — Download</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+
 body {
   background: #050508;
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Arabic', 'Noto Sans SC', 'Noto Sans Devanagari', sans-serif;
   direction: rtl;
   color: #fff;
   overflow-x: hidden;
 }
-.bg-glow {
+
+.bg-image {
   position: fixed;
-  top: -20%; left: -20%;
-  width: 140%; height: 140%;
-  background: radial-gradient(circle at 50% 20%, rgba(255,215,0,0.06) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(37,211,102,0.03) 0%, transparent 40%);
-  pointer-events: none;
+  inset: 0;
+  background: url('https://i.postimg.cc/gJycPYqk/1786977067134.png') center/cover no-repeat;
   z-index: 0;
 }
-.app-container {
-  position: relative;
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,8,0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 20px 20px;
-}
-.logo-wrapper {
-  text-align: center;
-  margin-bottom: 36px;
-  cursor: pointer;
-  transition: transform 0.3s;
-}
-.logo-wrapper:active { transform: scale(0.96); }
-.logo-img {
-  width: 110px; height: 110px;
-  border-radius: 28px;
-  object-fit: cover;
-  margin: 0 auto 14px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,0,0.1);
-  transition: box-shadow 0.3s;
-}
-.logo-wrapper:hover .logo-img {
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 3px rgba(255,215,0,0.2);
-}
-.logo-text {
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  background: linear-gradient(135deg, #FFD700, #FF8C00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.logo-sub {
-  font-size: 11px;
-  color: #555;
-  margin-top: 4px;
-  letter-spacing: 4px;
-}
-.glass-card {
-  background: rgba(255,255,255,0.04);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 28px;
-  padding: 32px 24px;
-  width: 100%;
-  max-width: 440px;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.4);
-}
-.welcome-badge {
-  background: rgba(255,215,0,0.08);
-  border: 1px solid rgba(255,215,0,0.15);
-  border-radius: 16px;
-  padding: 14px 18px;
-  margin-bottom: 22px;
-  font-size: 15px;
-  color: #FFD700;
-  text-align: center;
-  display: none;
-  animation: fadeIn 0.5s;
-  font-weight: 600;
-}
-.input-group { margin-bottom: 18px; }
-.input-group label {
-  display: block;
-  color: #777;
-  font-size: 13px;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-.input-wrap {
-  position: relative;
-}
-.input-wrap input {
-  width: 100%;
-  padding: 18px 18px 18px 54px;
-  border-radius: 18px;
-  border: 1.5px solid rgba(255,255,255,0.1);
-  background: rgba(0,0,0,0.25);
-  color: #fff;
-  font-size: 18px;
-  outline: none;
-  transition: all 0.3s;
-  direction: ltr;
-  text-align: right;
-  font-family: monospace;
-}
-.input-wrap input:focus {
-  border-color: #FFD700;
-  box-shadow: 0 0 0 4px rgba(255,215,0,0.08);
-}
-.input-wrap .flag {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 24px;
-}
-.btn-main {
-  width: 100%;
-  padding: 18px;
-  border-radius: 18px;
-  border: none;
-  background: linear-gradient(135deg, #FFD700, #FF8C00);
-  color: #000;
-  font-size: 16px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-.btn-main:active { transform: scale(0.97); }
-.result-box {
-  margin-top: 24px;
-  padding: 28px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 22px;
-  text-align: center;
-  display: none;
-  animation: fadeUp 0.5s;
-}
-.result-avatar {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #FFD700, #FF8C00);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 36px;
-  margin: 0 auto 14px;
-  box-shadow: 0 12px 35px rgba(255,215,0,0.15);
-}
-.result-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-.result-phone { color: #888; font-size: 14px; font-family: monospace; direction: ltr; margin-bottom: 8px; }
-.result-link {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,215,0,0.15);
-  border-radius: 12px;
-  padding: 12px 14px;
-  font-size: 12px;
-  color: #FFD700;
-  word-break: break-all;
-  margin-bottom: 16px;
-  direction: ltr;
-  text-align: right;
-}
-.btn-row { display: flex; gap: 10px; }
-.btn-row button {
-  flex: 1;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-wa { background: #25D366; color: #fff; }
-.btn-go { background: linear-gradient(135deg, #FFD700, #FF8C00); color: #000; }
-.error-msg {
-  color: #ff5555;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 14px;
-  display: none;
-  font-weight: 500;
-}
-.loading-msg {
-  color: #666;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 14px;
+  padding: 24px 20px 32px;
 }
 
-.steps-section {
-  margin-top: 28px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.04);
+.lang-bar {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.lang-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: #888;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+.lang-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.lang-btn.active {
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  color: #000;
+  border-color: transparent;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 24px;
+  animation: fadeDown 0.8s ease;
+}
+.logo-img {
+  width: 100px; height: 100px;
+  border-radius: 26px;
+  object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.6),
+    0 0 0 2px rgba(255,215,0,0.08),
+    0 0 60px rgba(255,215,0,0.1);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,215,0,0.08), 0 0 60px rgba(255,215,0,0.1); }
+  50% { box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 0 3px rgba(255,215,0,0.15), 0 0 80px rgba(255,215,0,0.15); }
+}
+.logo-title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #FFD700, #FF8C00, #FFD700);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+@keyframes shine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+.logo-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 6px;
+  letter-spacing: 4px;
+  font-weight: 300;
+}
+
+.alert-banner {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255,68,68,0.1);
+  border: 1px solid rgba(255,68,68,0.2);
+  border-radius: 20px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  animation: fadeUp 0.6s ease 0.2s both;
+  backdrop-filter: blur(10px);
+}
+.alert-icon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.alert-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ff6b6b;
+  margin-bottom: 4px;
+}
+.alert-text {
+  font-size: 12px;
+  color: #cc5555;
+  line-height: 1.6;
+}
+
+.device-card {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 28px 22px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+.device-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.device-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.device-desc {
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.btn-wrap {
+  margin: 8px 0;
+}
+.btn-dynamic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-family: inherit;
+  color: #fff;
+  min-width: 260px;
+}
+.btn-dynamic:hover { transform: translateY(-2px); }
+.btn-dynamic:active { transform: scale(0.97); }
+.btn-dynamic img {
+  height: 32px;
+  width: auto;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #FFD700, #FF8C00);
+  color: #000;
+  box-shadow: 0 8px 30px rgba(255,215,0,0.2);
+}
+.btn-gold:hover { box-shadow: 0 12px 40px rgba(255,215,0,0.3); }
+
+.btn-green {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(37,211,102,0.2);
+}
+.btn-green:hover { box-shadow: 0 12px 40px rgba(37,211,102,0.3); }
+
+.btn-blue {
+  background: linear-gradient(135deg, #007AFF, #0051D5);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(0,122,255,0.2);
+}
+.btn-blue:hover { box-shadow: 0 12px 40px rgba(0,122,255,0.3); }
+
+.btn-dark {
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #fff;
+}
+.btn-dark:hover { border-color: rgba(255,215,0,0.3); }
+
+.btn-desc {
+  font-size: 12px;
+  color: #888;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.steps-box {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  text-align: right;
 }
 .steps-title {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 16px;
-  font-weight: 600;
-}
-.step-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
   font-size: 13px;
   color: #888;
+  margin-bottom: 14px;
+  font-weight: 600;
+  text-align: center;
 }
-.step-item:last-child { border: none; }
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-size: 13px;
+  color: #bbb;
+  line-height: 1.6;
+}
+.step:last-child { border: none; }
 .step-num {
-  width: 32px; height: 32px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   background: rgba(255,215,0,0.1);
   color: #FFD700;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.install-android {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 14px 24px;
-  display: none;
-  align-items: center;
-  gap: 14px;
-  z-index: 100;
-  max-width: 92%;
+.manual-section {
+  width: 100%;
+  max-width: 480px;
+  margin-top: 8px;
+  animation: fadeUp 0.6s ease 0.5s both;
 }
-.install-android.show { display: flex; }
-.install-android button {
-  background: linear-gradient(135deg, #FFD700, #FF8C00);
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 13px;
+.manual-title {
+  text-align: center;
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 12px;
+}
+.manual-btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.manual-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 6px;
+  text-align: center;
   cursor: pointer;
-}
-.install-ios {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.92);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 18px 24px;
-  z-index: 100;
-  display: none;
-  text-align: center;
-  max-width: 92%;
-  width: fit-content;
-}
-.install-ios.show { display: block; }
-.install-ios .ios-icon { font-size: 28px; margin-bottom: 6px; }
-.install-ios .ios-title { font-weight: 700; margin-bottom: 4px; }
-.install-ios .ios-text { color: #888; font-size: 13px; }
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.88);
-  backdrop-filter: blur(25px);
-  z-index: 200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.modal-overlay.show { display: flex; }
-.modal-box {
-  background: #0c0c10;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 28px;
-  padding: 36px 28px;
-  width: 100%;
-  max-width: 380px;
-  text-align: center;
-  animation: scaleIn 0.35s;
-}
-.modal-box img {
-  width: 90px; height: 90px;
-  border-radius: 24px;
-  object-fit: cover;
-  margin-bottom: 16px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-}
-.modal-box h2 {
-  font-size: 22px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #FFD700, #FF8C00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 8px;
-}
-.modal-box p {
-  color: #777;
-  font-size: 14px;
-  line-height: 1.8;
-  margin-bottom: 24px;
-}
-.modal-close {
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  background: rgba(255,255,255,0.06);
+  transition: all 0.3s;
   color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
+  font-family: inherit;
 }
+.manual-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,215,0,0.2);
+  transform: translateY(-2px);
+}
+.manual-btn .icon-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 6px;
+}
+.manual-btn .label { font-size: 11px; font-weight: 600; }
 
 .footer {
   margin-top: auto;
-  padding-top: 40px;
+  padding-top: 32px;
   text-align: center;
-  color: #333;
-  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  font-size: 11px;
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none !important; }
+
+body.ltr { direction: ltr; }
+body.ltr .steps-box { text-align: left; }
+body.ltr .step { flex-direction: row-reverse; }
+
+@media (max-width: 400px) {
+  .logo-img { width: 80px; height: 80px; }
+  .logo-title { font-size: 24px; }
+  .device-card { padding: 20px 16px; }
+  .manual-btns { grid-template-columns: 1fr; }
+  .btn-dynamic { min-width: 100%; }
+  .btn-dynamic img { height: 28px; }
+  .device-icon { width: 52px; height: 52px; }
+}
 </style>
 </head>
 <body>
 
-<div class="bg-glow"></div>
+<div class="bg-image"></div>
+<div class="bg-overlay"></div>
 
-<div class="app-container">
+<div class="container">
 
-  <div class="logo-wrapper" onclick="openAbout()">
+  <div class="lang-bar">
+    <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">🇪🇬 العربية</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">🇺🇸 English</button>
+    <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">🇨🇳 中文</button>
+    <button class="lang-btn" data-lang="hi" onclick="setLang('hi')">🇮🇳 हिन्दी</button>
+  </div>
+
+  <div class="logo-section">
     <img src="https://i.postimg.cc/prFWqdNm/IMG-20260817-WA0047.jpg" class="logo-img" alt="ASLAN LIVE">
-    <div class="logo-text">ASLAN LIVE</div>
-    <div class="logo-sub">LIVE STREAMING</div>
+    <div class="logo-title">ASLAN LIVE</div>
+    <div class="logo-sub" id="logoSub">ادخل عالمك الآن</div>
   </div>
 
-  <div class="glass-card">
-    <div class="welcome-badge" id="welcomeBadge"></div>
-
-    <div class="input-group">
-      <label>🔍 أدخل رقم تليفونك</label>
-      <div class="input-wrap">
-        <span class="flag">🇪🇬</span>
-        <input type="tel" id="phoneInput" placeholder="01xxxxxxxx" maxlength="11" onkeypress="if(event.key==='Enter') searchUser()">
-      </div>
-    </div>
-
-    <button class="btn-main" onclick="searchUser()">
-      <span>🔍</span> بحث
-    </button>
-
-    <div class="loading-msg" id="loadingMsg">⏳ جاري الاتصال بقاعدة البيانات...</div>
-    <div class="error-msg" id="errorMsg">❌ الرقم ده مش مسجل عندنا. اتواصل مع الدعم.</div>
-
-    <div class="result-box" id="resultBox">
-      <div class="result-avatar">👤</div>
-      <div class="result-name" id="resName"></div>
-      <div class="result-phone" id="resPhone"></div>
-      <div class="result-link" id="resLink"></div>
-      <div class="btn-row">
-        <button class="btn-wa" onclick="sendWhatsApp()">💬 واتساب</button>
-        <button class="btn-go" onclick="openUserLink()">🚀 فتح الرابط</button>
-      </div>
-    </div>
-
-    <div class="steps-section" id="stepsSection">
-      <div class="steps-title">📲 إزاي تثبّت الموقع على شاشتك؟</div>
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div>افتح الرابط في متصفح Safari (iPhone) أو Chrome (Android)</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div>اضغط زر المشاركة ↗️ في الأسفل (iPhone) أو القائمة ⋮ (Android)</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div>اختار "Add to Home Screen" أو "إضافة للشاشة الرئيسية"</div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">4</div>
-        <div>كده الموقع بقى تطبيق على شاشتك! 🎉</div>
-      </div>
+  <div class="alert-banner">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-title" id="alertTitle">تحديث مهم</div>
+    <div class="alert-text" id="alertText">
+      قريبًا رابط iPhone الرسمي على App Store<br>
+      يمكنك الآن الدخول إلى ASLAN LIVE من Safari بدون App Store
     </div>
   </div>
 
-  <div class="footer">© 2026 ASLAN LIVE — جميع الحقوق محفوظة</div>
-</div>
-
-<div class="install-android" id="installAndroid">
-  <span>📲 ثبّت التطبيق على شاشتك!</span>
-  <button onclick="installApp()">تثبيت</button>
-</div>
-
-<div class="install-ios" id="installIOS">
-  <div class="ios-icon">📲</div>
-  <div class="ios-title">اضغط زر المشاركة ↗️</div>
-  <div class="ios-text">ثم اختار "Add to Home Screen"</div>
-</div>
-
-<div class="modal-overlay" id="aboutModal" onclick="if(event.target===this)closeAbout()">
-  <div class="modal-box">
-    <img src="https://i.postimg.cc/prFWqdNm/IMG-20260817-WA0047.jpg" alt="ASLAN LIVE">
-    <h2>ASLAN LIVE</h2>
-    <p>أفضل منصة لمشاهدة البث المباشر.<br>صُممت لتقدم لك تجربة سلسة على كل الأجهزة.<br><br>📱 iPhone & Android<br>🚀 سريع وآمن</p>
-    <button class="modal-close" onclick="closeAbout()">إغلاق</button>
+  <!-- iOS Section -->
+  <div class="device-card hidden" id="iosSection">
+    <img class="device-icon" id="iosIcon" src="" alt="iPhone">
+    <div class="device-title" id="iosTitle">ASLAN LIVE على iPhone</div>
+    <div class="device-desc" id="iosDesc">
+      افتح ASLAN LIVE مباشرة من Safari<br>
+      وثبّته على شاشتك الرئيسية
+    </div>
+    <div id="iosButtons"></div>
+    <div class="steps-box" id="iosSteps"></div>
   </div>
+
+  <!-- Android Section -->
+  <div class="device-card hidden" id="androidSection">
+    <img class="device-icon" id="androidIcon" src="" alt="Android">
+    <div class="device-title" id="androidTitle">ASLAN LIVE للأندرويد</div>
+    <div class="device-desc" id="androidDesc">
+      حمّل تطبيق ASLAN LIVE مباشرة على جهازك الأندرويد<br>
+      بدون الحاجة لـ Google Play
+    </div>
+    <div id="androidButtons"></div>
+    <div class="steps-box" id="androidSteps"></div>
+  </div>
+
+  <!-- Web/PC Section -->
+  <div class="device-card hidden" id="webSection">
+    <img class="device-icon" id="webIcon" src="" alt="Web">
+    <div class="device-title" id="webTitle">ASLAN LIVE Web</div>
+    <div class="device-desc" id="webDesc">
+      ادخل إلى ASLAN LIVE مباشرة من متصفحك<br>
+      على الكمبيوتر أو أي جهاز
+    </div>
+    <div id="webButtons"></div>
+    <div class="steps-box" id="webSteps"></div>
+  </div>
+
+  <div class="manual-section">
+    <div class="manual-title" id="manualTitle">أو اختر جهازك يدويًا</div>
+    <div class="manual-btns">
+      <button class="manual-btn" onclick="showSection('ios')">
+        <img class="icon-img" id="manualIosIcon" src="" alt="iPhone">
+        <span class="label">iPhone</span>
+      </button>
+      <button class="manual-btn" onclick="showSection('android')">
+        <img class="icon-img" id="manualAndroidIcon" src="" alt="Android">
+        <span class="label">Android</span>
+      </button>
+      <button class="manual-btn" onclick="showSection('web')">
+        <img class="icon-img" id="manualWebIcon" src="" alt="Web">
+        <span class="label">Web</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="footer" id="footerText">
+    © 2026 ASLAN LIVE — جميع الحقوق محفوظة
+  </div>
+
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
-// ==================== Firebase ====================
 const firebaseConfig = {
   apiKey: "AIzaSyCTjxcKGbIqMsTBfQAq7OhdGG3FpaktfPg",
   authDomain: "aslan-live.firebaseapp.com",
@@ -459,109 +472,273 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const rtdb = firebase.database();
 
-// ==================== Logic ====================
-function normPhone(p) {
-  p = p.replace(/\s+/g, '').replace(/\+/g, '');
-  if (p.startsWith('0')) p = '20' + p.slice(1);
-  if (!p.startsWith('20')) p = '20' + p;
-  return p;
-}
-function fmtPhone(p) { return p.startsWith('20') ? '0' + p.slice(2) : p; }
+const i18n = {
+  ar: {
+    logoSub: 'ادخل عالمك الآن',
+    alertTitle: 'تحديث مهم',
+    alertText: 'قريبًا رابط iPhone الرسمي على App Store\nيمكنك الآن الدخول إلى ASLAN LIVE من Safari بدون App Store',
+    iosTitle: 'ASLAN LIVE على iPhone',
+    iosDesc: 'افتح ASLAN LIVE مباشرة من Safari\nوثبّته على شاشتك الرئيسية',
+    androidTitle: 'ASLAN LIVE للأندرويد',
+    androidDesc: 'حمّل تطبيق ASLAN LIVE مباشرة على جهازك الأندرويد\nبدون الحاجة لـ Google Play',
+    webTitle: 'ASLAN LIVE Web',
+    webDesc: 'ادخل إلى ASLAN LIVE مباشرة من متصفحك\nعلى الكمبيوتر أو أي جهاز',
+    manualTitle: 'أو اختر جهازك يدويًا',
+    footer: '© 2026 ASLAN LIVE — جميع الحقوق محفوظة',
+    stepsTitle: 'طريقة الإضافة إلى الشاشة الرئيسية',
+    iosBtnName: 'تحميل للايفون',
+    androidBtnName: 'تحميل التطبيق',
+    webBtnName: 'دخول ASLAN LIVE',
+    iosBtnDesc: 'اضغط على الزر أعلاه لتحميل التطبيق مباشرة على جهازك',
+    androidBtnDesc: 'اضغط على الزر أعلاه لتحميل التطبيق مباشرة على جهازك',
+    webBtnDesc: 'اضغط على الزر أعلاه للدخول إلى الموقع مباشرة',
+    dir: 'rtl'
+  },
+  en: {
+    logoSub: 'Enter Your World Now',
+    alertTitle: 'Important Update',
+    alertText: 'Official iPhone link coming soon on App Store\nYou can now access ASLAN LIVE from Safari without App Store',
+    iosTitle: 'ASLAN LIVE on iPhone',
+    iosDesc: 'Open ASLAN LIVE directly from Safari\nAdd it to your Home Screen',
+    androidTitle: 'ASLAN LIVE for Android',
+    androidDesc: 'Download ASLAN LIVE directly to your Android device\nNo Google Play needed',
+    webTitle: 'ASLAN LIVE Web',
+    webDesc: 'Access ASLAN LIVE directly from your browser\nOn PC or any device',
+    manualTitle: 'Or choose your device manually',
+    footer: '© 2026 ASLAN LIVE — All Rights Reserved',
+    stepsTitle: 'How to add to Home Screen',
+    iosBtnName: 'Download for iPhone',
+    androidBtnName: 'Download App',
+    webBtnName: 'Enter ASLAN LIVE',
+    iosBtnDesc: 'Tap the button above to download the app directly to your device',
+    androidBtnDesc: 'Tap the button above to download the app directly to your device',
+    webBtnDesc: 'Tap the button above to enter the website directly',
+    dir: 'ltr'
+  },
+  zh: {
+    logoSub: '立即进入您的世界',
+    alertTitle: '重要更新',
+    alertText: 'iPhone 官方链接即将上架 App Store\n您现在可以直接从 Safari 访问 ASLAN LIVE，无需 App Store',
+    iosTitle: 'iPhone 上的 ASLAN LIVE',
+    iosDesc: '直接从 Safari 打开 ASLAN LIVE\n添加到主屏幕',
+    androidTitle: 'Android 版 ASLAN LIVE',
+    androidDesc: '直接下载 ASLAN LIVE 到您的 Android 设备\n无需 Google Play',
+    webTitle: 'ASLAN LIVE 网页版',
+    webDesc: '直接从浏览器访问 ASLAN LIVE\n在电脑或任何设备上',
+    manualTitle: '或手动选择您的设备',
+    footer: '© 2026 ASLAN LIVE — 版权所有',
+    stepsTitle: '如何添加到主屏幕',
+    iosBtnName: '下载 iPhone 版',
+    androidBtnName: '下载应用',
+    webBtnName: '进入 ASLAN LIVE',
+    iosBtnDesc: '点击上方按钮直接下载应用到您的设备',
+    androidBtnDesc: '点击上方按钮直接下载应用到您的设备',
+    webBtnDesc: '点击上方按钮直接进入网站',
+    dir: 'ltr'
+  },
+  hi: {
+    logoSub: 'अपनी दुनिया में प्रवेश करें',
+    alertTitle: 'महत्वपूर्ण अपडेट',
+    alertText: 'iPhone का आधिकारिक लिंक जल्द ही App Store पर आ रहा है\nआप अब App Store के बिना सीधे Safari से ASLAN LIVE का उपयोग कर सकते हैं',
+    iosTitle: 'iPhone पर ASLAN LIVE',
+    iosDesc: 'सीधे Safari से ASLAN LIVE खोलें\nइसे अपनी होम स्क्रीन पर जोड़ें',
+    androidTitle: 'Android के लिए ASLAN LIVE',
+    androidDesc: 'सीधे अपने Android डिवाइस पर ASLAN LIVE डाउनलोड करें\nGoogle Play की आवश्यकता नहीं',
+    webTitle: 'ASLAN LIVE Web',
+    webDesc: 'सीधे अपने ब्राउज़र से ASLAN LIVE एक्सेस करें\nPC या किसी भी डिवाइस पर',
+    manualTitle: 'या मैन्युअल रूप से अपना डिवाइस चुनें',
+    footer: '© 2026 ASLAN LIVE — सर्वाधिकार सुरक्षित',
+    stepsTitle: 'होम स्क्रीन पर जोड़ने का तरीका',
+    iosBtnName: 'iPhone के लिए डाउनलोड करें',
+    androidBtnName: 'ऐप डाउनलोड करें',
+    webBtnName: 'ASLAN LIVE में प्रवेश करें',
+    iosBtnDesc: 'ऊपर दिए गए बटन को दबाकर सीधे अपने डिवाइस पर ऐप डाउनलोड करें',
+    androidBtnDesc: 'ऊपर दिए गए बटन को दबाकर सीधे अपने डिवाइस पर ऐप डाउनलोड करें',
+    webBtnDesc: 'सीधे वेबसाइट में प्रवेश करने के लिए ऊपर दिए गए बटन को दबाएं',
+    dir: 'ltr'
+  }
+};
 
-let users = [];
-let baseUrl = '';
-let currentUser = null;
+let currentLang = 'ar';
+let allButtons = [];
+let allSteps = {};
+let defaultButtons = {};
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.body.classList.toggle('ltr', i18n[lang].dir === 'ltr');
+  document.body.dir = i18n[lang].dir;
+
+  const t = i18n[lang];
+  document.getElementById('logoSub').textContent = t.logoSub;
+  document.getElementById('alertTitle').textContent = t.alertTitle;
+  document.getElementById('alertText').innerHTML = t.alertText.replace(/\n/g, '<br>');
+  document.getElementById('iosTitle').textContent = t.iosTitle;
+  document.getElementById('iosDesc').innerHTML = t.iosDesc.replace(/\n/g, '<br>');
+  document.getElementById('androidTitle').textContent = t.androidTitle;
+  document.getElementById('androidDesc').innerHTML = t.androidDesc.replace(/\n/g, '<br>');
+  document.getElementById('webTitle').textContent = t.webTitle;
+  document.getElementById('webDesc').innerHTML = t.webDesc.replace(/\n/g, '<br>');
+  document.getElementById('manualTitle').textContent = t.manualTitle;
+  document.getElementById('footerText').textContent = t.footer;
+
+  renderSteps();
+  renderButtons();
+}
+
+function detectDevice() {
+  const ua = navigator.userAgent;
+  const platform = navigator.platform || '';
+  const isIOS = /iPad|iPhone|iPod/.test(ua) || (platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/.test(ua);
+  const isMobile = isIOS || isAndroid || /Mobile|webOS|BlackBerry|IEMobile|Opera Mini/.test(ua);
+
+  if (isIOS) showSection('ios');
+  else if (isAndroid) showSection('android');
+  else if (!isMobile) showSection('web');
+  else showSection('ios');
+}
+
+function showSection(type) {
+  document.getElementById('iosSection').classList.add('hidden');
+  document.getElementById('androidSection').classList.add('hidden');
+  document.getElementById('webSection').classList.add('hidden');
+  if (type === 'ios') document.getElementById('iosSection').classList.remove('hidden');
+  else if (type === 'android') document.getElementById('androidSection').classList.remove('hidden');
+  else if (type === 'web') document.getElementById('webSection').classList.remove('hidden');
+}
 
 function init() {
-  rtdb.ref('users').once('value').then(snap => {
+  rtdb.ref('settings/defaultLang').once('value').then(s => {
+    const savedLang = s.val();
+    if (savedLang && i18n[savedLang]) setLang(savedLang);
+  });
+
+  rtdb.ref('buttons').on('value', snap => {
     const data = snap.val() || {};
-    users = Object.entries(data).map(([id, u]) => ({ id, ...u }));
-    document.getElementById('loadingMsg').style.display = 'none';
-
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get('ref');
-    if (ref) {
-      const u = users.find(x => x.phone === ref);
-      if (u) {
-        document.getElementById('welcomeBadge').style.display = 'block';
-        document.getElementById('welcomeBadge').textContent = '👋 أهلاً بيك يا ' + u.name + '!';
-        document.getElementById('phoneInput').value = fmtPhone(u.phone);
-      }
-    }
+    allButtons = Object.entries(data).map(([id, b]) => ({ id, ...b }));
+    renderButtons();
   });
 
-  rtdb.ref('settings/baseUrl').once('value').then(s => {
-    baseUrl = s.val() || 'https://aslan.live';
+  rtdb.ref('settings/steps').on('value', snap => {
+    allSteps = snap.val() || {};
+    renderSteps();
   });
 
-  window.addEventListener('beforeinstallprompt', e => {
-    e.preventDefault();
-    window.deferredPrompt = e;
-    if (!window.matchMedia('(display-mode: standalone)').matches) {
-      document.getElementById('installAndroid').classList.add('show');
-    }
+  rtdb.ref('settings/defaultButtons').on('value', snap => {
+    defaultButtons = snap.val() || {};
+    renderButtons();
   });
 
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const isStandalone = window.navigator.standalone === true;
-  if (isIOS && !isStandalone) {
-    setTimeout(() => document.getElementById('installIOS').classList.add('show'), 2500);
-    setTimeout(() => document.getElementById('installIOS').classList.remove('show'), 10000);
-  }
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); });
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+
+  detectDevice();
 }
 
-function searchUser() {
-  const val = document.getElementById('phoneInput').value.trim();
-  if (!val) return;
-  const phone = normPhone(val);
-  const u = users.find(x => x.phone === phone);
+function createBtnEl(btn, cls) {
+  const wrap = document.createElement('div');
+  wrap.className = 'btn-wrap';
 
-  document.getElementById('errorMsg').style.display = 'none';
-  const box = document.getElementById('resultBox');
-
-  if (u) {
-    currentUser = u;
-    box.style.display = 'block';
-    document.getElementById('resName').textContent = u.name;
-    document.getElementById('resPhone').textContent = fmtPhone(u.phone);
-    const link = u.customLink || baseUrl;
-    document.getElementById('resLink').textContent = link;
-    setTimeout(() => box.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  const a = document.createElement('a');
+  a.href = btn.url || '#';
+  a.className = 'btn-dynamic ' + cls;
+  a.target = '_blank';
+  if (btn.icon) {
+    a.innerHTML = '<img src="' + btn.icon + '" alt=""> <span>' + (btn.name || '') + '</span>';
   } else {
-    box.style.display = 'none';
-    document.getElementById('errorMsg').style.display = 'block';
+    a.innerHTML = '<span>🚀</span> <span>' + (btn.name || '') + '</span>';
   }
+  wrap.appendChild(a);
+
+  if (btn.desc) {
+    const d = document.createElement('div');
+    d.className = 'btn-desc';
+    d.textContent = btn.desc;
+    wrap.appendChild(d);
+  }
+  return wrap;
 }
 
-function sendWhatsApp() {
-  if (!currentUser) return;
-  const link = currentUser.customLink || baseUrl;
-  const msg = 'أهلاً ' + currentUser.name + '! 👋\nرابطك على ASLAN LIVE:\n' + link;
-  window.open('https://wa.me/' + currentUser.phone + '?text=' + encodeURIComponent(msg), '_blank');
+function renderButtons() {
+  const iosBox = document.getElementById('iosButtons');
+  const androidBox = document.getElementById('androidButtons');
+  const webBox = document.getElementById('webButtons');
+  const iosIcon = document.getElementById('iosIcon');
+  const androidIcon = document.getElementById('androidIcon');
+  const webIcon = document.getElementById('webIcon');
+  const manualIosIcon = document.getElementById('manualIosIcon');
+  const manualAndroidIcon = document.getElementById('manualAndroidIcon');
+  const manualWebIcon = document.getElementById('manualWebIcon');
+
+  iosBox.innerHTML = '';
+  androidBox.innerHTML = '';
+  webBox.innerHTML = '';
+
+  const defs = {
+    ios: defaultButtons.ios || {},
+    android: defaultButtons.android || {},
+    web: defaultButtons.web || {}
+  };
+
+  const fallbackIcon = 'https://i.postimg.cc/prFWqdNm/IMG-20260817-WA0047.jpg';
+  
+  if (iosIcon) iosIcon.src = defs.ios.icon || fallbackIcon;
+  if (androidIcon) androidIcon.src = defs.android.icon || fallbackIcon;
+  if (webIcon) webIcon.src = defs.web.icon || fallbackIcon;
+  if (manualIosIcon) manualIosIcon.src = defs.ios.icon || fallbackIcon;
+  if (manualAndroidIcon) manualAndroidIcon.src = defs.android.icon || fallbackIcon;
+  if (manualWebIcon) manualWebIcon.src = defs.web.icon || fallbackIcon;
+
+  const iosBtnData = {
+    name: defs.ios.name || i18n[currentLang].iosBtnName,
+    url: defs.ios.url || './',
+    icon: '',
+    desc: i18n[currentLang].iosBtnDesc
+  };
+  iosBox.appendChild(createBtnEl(iosBtnData, 'btn-gold'));
+
+  const androidBtnData = {
+    name: defs.android.name || i18n[currentLang].androidBtnName,
+    url: defs.android.url || 'https://aslan-live.vercel.app/app.apk',
+    icon: '',
+    desc: i18n[currentLang].androidBtnDesc
+  };
+  androidBox.appendChild(createBtnEl(androidBtnData, 'btn-green'));
+
+  const webBtnData = {
+    name: defs.web.name || i18n[currentLang].webBtnName,
+    url: defs.web.url || './',
+    icon: '',
+    desc: i18n[currentLang].webBtnDesc
+  };
+  webBox.appendChild(createBtnEl(webBtnData, 'btn-blue'));
+
+  allButtons.forEach(btn => {
+    const el = createBtnEl(btn, 'btn-gold');
+    if (btn.device === 'all' || btn.device === 'ios') iosBox.appendChild(el.cloneNode(true));
+    if (btn.device === 'all' || btn.device === 'android') androidBox.appendChild(el.cloneNode(true));
+    if (btn.device === 'all' || btn.device === 'web') webBox.appendChild(el.cloneNode(true));
+  });
 }
 
-function openUserLink() {
-  if (!currentUser) return;
-  const link = currentUser.customLink || baseUrl;
-  window.open(link, '_blank');
-}
-
-function installApp() {
-  const prompt = window.deferredPrompt;
-  if (prompt) {
-    prompt.prompt();
-    prompt.userChoice.then(() => {
-      document.getElementById('installAndroid').classList.remove('show');
-      window.deferredPrompt = null;
+function renderSteps() {
+  const devices = ['ios', 'android', 'web'];
+  devices.forEach(dev => {
+    const box = document.getElementById(dev + 'Steps');
+    const stepsText = allSteps[dev] || '';
+    if (!stepsText.trim()) {
+      box.innerHTML = '';
+      return;
+    }
+    const lines = stepsText.split('\n').filter(l => l.trim());
+    let html = '<div class="steps-title">📲 ' + i18n[currentLang].stepsTitle + '</div>';
+    lines.forEach((line, i) => {
+      html += '<div class="step"><div class="step-num">' + (i+1) + '</div><div>' + line.trim() + '</div></div>';
     });
-  }
-}
-
-function openAbout() {
-  document.getElementById('aboutModal').classList.add('show');
-}
-function closeAbout() {
-  document.getElementById('aboutModal').classList.remove('show');
+    box.innerHTML = html;
+  });
 }
 
 init();
